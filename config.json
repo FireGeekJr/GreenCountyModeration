@@ -1,0 +1,10 @@
+{
+    "prefix": ".",
+    "token": "Nzg5MzQwODAyNzM5OTk0NjY0.X9wo6A.OIzcFOzIwKWkGItRBB-xvWBwY9Y",
+    "Bot_age": "1",
+    "words_array": ["Hi", "Bye", "This is array"],
+    "bot_info": {
+        "name": "FireBot",
+        "version": "1.1.5"
+    }
+}
