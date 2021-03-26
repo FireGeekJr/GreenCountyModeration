@@ -1,4 +1,4 @@
-const { Message } = require('discord.js');
+const { Message, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const words = require('./words')
 const word = words.words
@@ -32,14 +32,20 @@ module.exports = {
     ) {
       const target = mentions.users.first()
       if (message.guild.members.cache.get(args[0])) {
-      
         const bantarget = message.guild.members.cache.get(args[0])
         if (bantarget.bannable) {
          bantarget.kick()
-         message.channel.send(`<@!${args[0]}> Has been kicked`)
-         client.channels.cache.get(`812025615732572230`).send(`${message.author} has kicked <@!${args[0]}> | ${args[0]} |
-         ${message.channel.guild.name}`)
-         return;
+         const embed = new MessageEmbed()
+         .setTitle(`Kick Info`)
+         .setColor(`#FF0000`)
+         .setThumbnail(message.guild.iconURL())
+         .addFields(
+         { name: `Moderator`, value: `${message.author}`, inline: true},
+         { name: `Kicked`, value: `${targetMember}`, inline: true},
+    )
+      message.channel.send(embed)
+      client.channels.cache.get(`812025615732572230`).send(embed)
+      return;
         }
         else {
           message.channel.send(`<@!${bantarget}> cannot be kicked`)
