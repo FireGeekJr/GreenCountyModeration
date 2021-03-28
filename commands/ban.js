@@ -8,7 +8,6 @@ module.exports = {
     description: 'Ban a member from the guild',
     execute(message, args, date, timesent){
         const { member, mentions } = message
-        
         const tag = `<@${member.id}>`
     
         if (
@@ -16,24 +15,28 @@ module.exports = {
           member.hasPermission('BAN_MEMBERS')
         ) {
           const target = mentions.users.first()
-          if (message.guild.members.cache.get(args[0])) {
-            const bantarget = message.guild.members.cache.get(args[0])
-             bantarget.ban()
+          if (client.users.fetch(args[0])) {
+            const bantarget = client.users.fetch(args[0])
+             bantarget.ban(reason, args.splice(1,100).join(" "))
+              const ra = args.splice(1, 100)
               const embed = new MessageEmbed()
               .setTitle(`Ban Info`)
               .setColor(`#FF0000`)
               .addFields(
                { name: `Moderator`, value: `${message.author}`, inline: true},
                { name: `Banned`, value: `${args[0]}`, inline: true},
+               { name: `Reason`, value: `${ra.join(" ")}`, inline: false}
            )
              message.channel.send(embed)
              client.channels.cache.get(`812025615732572230`).send(embed)
              return;
           }
           else if (target) {
-            const targetMember = message.guild.members.cache.get(target.id)
+            const targetMember = client.users.fetch(target.id)
             if (targetMember.bannable) {
              targetMember.ban() 
+             const ra = args.splice(1, 100)
+             
               const embed = new MessageEmbed()
               .setTitle(`Ban Info`)
               .setColor(`#FF0000`)
@@ -41,6 +44,7 @@ module.exports = {
               .addFields(
               { name: `Moderator`, value: `${message.author}`, inline: true},
               { name: `Banned`, value: `${targetMember}`, inline: true},
+              { name: `Reason`, value: `${ra.join(" ")}`, inline: false}
          )
            message.channel.send(embed)
            client.channels.cache.get(`812025615732572230`).send(embed)

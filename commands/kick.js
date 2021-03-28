@@ -35,13 +35,15 @@ module.exports = {
         const bantarget = message.guild.members.cache.get(args[0])
         if (bantarget.bannable) {
          bantarget.kick()
+         const ra = args.splice(1, 100)
          const embed = new MessageEmbed()
          .setTitle(`Kick Info`)
          .setColor(`#FF0000`)
          .setThumbnail(message.guild.iconURL())
          .addFields(
          { name: `Moderator`, value: `${message.author}`, inline: true},
-         { name: `Kicked`, value: `${targetMember}`, inline: true},
+         { name: `Kicked`, value: `${bantarget}`, inline: true},
+         { name: `Reason`, value: `${ra.join(" ")}`, inline: false}
     )
       message.channel.send(embed)
       client.channels.cache.get(`812025615732572230`).send(embed)
