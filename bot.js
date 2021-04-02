@@ -9,6 +9,7 @@ const { waitForDebugger } = require('inspector');
 const { start } = require('repl');
 global.client = new Discord.Client();
 client.commands = new Discord.Collection();
+global.config = require(`./config.json`)
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 

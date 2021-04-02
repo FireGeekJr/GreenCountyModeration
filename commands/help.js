@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const {prefix, token, bot_age, words_array, bot_info} = require('/Users/pmhilton/FireBot/config.json');
+const {prefix, token, bot_age, words_array, bot_info} = config
 
 module.exports = {
     name: 'help',

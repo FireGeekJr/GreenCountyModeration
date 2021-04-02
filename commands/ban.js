@@ -16,8 +16,8 @@ module.exports = {
         ) {
           const target = mentions.users.first()
           if (client.users.fetch(args[0])) {
-            const bantarget = client.users.fetch(args[0])
-             bantarget.ban(reason, args.splice(1,100).join(" "))
+            const bantarget = message.guild.members.get(client.users.fetch(args[0]))
+             
               const ra = args.splice(1, 100)
               const embed = new MessageEmbed()
               .setTitle(`Ban Info`)
@@ -27,14 +27,18 @@ module.exports = {
                { name: `Banned`, value: `${args[0]}`, inline: true},
                { name: `Reason`, value: `${ra.join(" ")}`, inline: false}
            )
+           bantarget.ban({
+            // days: 7,
+             reason: ra.join(" ")
+           })
              message.channel.send(embed)
              client.channels.cache.get(`812025615732572230`).send(embed)
              return;
           }
           else if (target) {
-            const targetMember = client.users.fetch(target.id)
+            const targetMember = message.guild.cache.member.get(message.mentions.members.first())
             if (targetMember.bannable) {
-             targetMember.ban() 
+ 
              const ra = args.splice(1, 100)
              
               const embed = new MessageEmbed()
@@ -44,8 +48,12 @@ module.exports = {
               .addFields(
               { name: `Moderator`, value: `${message.author}`, inline: true},
               { name: `Banned`, value: `${targetMember}`, inline: true},
-              { name: `Reason`, value: `${ra.join(" ")}`, inline: false}
+              { name: `Reason`, value: `**${ra.join(" ")}**`, inline: false}
          )
+         targetMember.ban({
+         // days: 7,
+          reason: ra.join(" ")
+        })
            message.channel.send(embed)
            client.channels.cache.get(`812025615732572230`).send(embed)
            return;
