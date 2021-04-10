@@ -1,4 +1,4 @@
-const { Message } = require('discord.js');
+const { Message, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const words = require('./words')
 const word = words.words
@@ -33,12 +33,22 @@ module.exports = {
       if (target) {
         const targetMember = message.guild.members.cache.get(target.id)
         targetMember.roles.add(myRole).catch(console.error)
-        message.channel.send(`${target} has been muted`)
+        const embed = new MessageEmbed()
+          .setTitle(`Mute info`)
+          .setColor(`#FF0000`)
+          .addFields(
+            {name: `Moderator`, value: `<@!${message.author.id}>`, inline: true},
+            {name: `User`, value: args[0], inline: true}
+          )
+        message.channel.send(embed)
       }
       }
     else {
+      const embed = new MessageEmbed()
+        .setTitle(`Mute Info`)
+        .setDescription(`You do not have permission to use the ${prefix}mute command <@!${message.author.id}>`)
       message.channel.send(
-        `${tag} You do not have permission to use this command.`
+        embed
       )
     }
   }
