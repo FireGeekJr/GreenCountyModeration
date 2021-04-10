@@ -4,13 +4,13 @@ const {prefix, token, bot_age, words_array, bot_info} = require('./config.json')
 
 const Discord = require('discord.js');
 
-const fs = require('fs');
+global.fs = require('fs');
 const { waitForDebugger } = require('inspector');
 const { start } = require('repl');
 global.client = new Discord.Client();
 client.commands = new Discord.Collection();
 global.config = require(`./config.json`)
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+global.commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 
 //client.on("ready", () =>{
