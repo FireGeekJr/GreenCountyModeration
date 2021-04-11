@@ -46,7 +46,7 @@ module.exports = {
          { name: `Reason`, value: `${ra.join(" ")}`, inline: false}
     )
       message.channel.send(embed)
-      client.channels.cache.get(`812025615732572230`).send(embed)
+      message.guild.channels(`logs`).send(embed)
       return;
         }
         else {

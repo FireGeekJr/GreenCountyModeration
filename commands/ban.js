@@ -46,7 +46,7 @@ module.exports = {
             )
         message.guild.members.ban(user, {'reason': reason}).then(() => {
         message.channel.send(banUserEmbed);
-        client.channels.cache.get(`812025615732572230`).send(banUserEmbed)
+        message.guild.channels.fetch(`logs`).send(banUserEmbed)
         }).catch(Error => {
             console.log(Error);
             return message.channel.send(cannotBanEmbed)
@@ -134,5 +134,3 @@ module.exports = {
 //          }
 //        }
 //      };
-     
-
