@@ -1,4 +1,4 @@
-const { Message } = require('discord.js');
+const { Message, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const words = require('./words')
 const word = words.words
@@ -33,13 +33,17 @@ module.exports = {
       if (target) {
         const targetMember = message.guild.members.cache.get(target.id)
         targetMember.roles.remove(myRole).catch(console.error)
-        message.channel.send(`${target} has been unmuted`)
+        const embed = new MessageEmbed()
+          .setTitle("Unmute Info")
+          .setDescription(`${target} has been unmuted!`)
+        message.channel.send(embed).then(msg => msg.delete({timeout: 5000}))
       }
       }
     else {
-      message.channel.send(
-        `${tag} You do not have permission to use this command.`
-      )
+      const embed = new MessageEmbed()
+      .setTitle("Unmute Info")
+      .setDescription(`You cant use that command!`)
+      message.channel.send(embed).then(msg => msg.delete({timeout: 5000}))
     }
   }
 } 

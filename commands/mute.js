@@ -46,10 +46,8 @@ module.exports = {
     else {
       const embed = new MessageEmbed()
         .setTitle(`Mute Info`)
-        .setDescription(`You do not have permission to use the ${prefix}mute command <@!${message.author.id}>`)
-      message.channel.send(
-        embed
-      )
+        .setDescription(`You cant use this command!`)
+      message.channel.send(embed).then(msg => msg.delete({timeout: 5000}))
     }
   }
 } 

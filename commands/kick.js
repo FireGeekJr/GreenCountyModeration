@@ -58,20 +58,31 @@ module.exports = {
         const targetMember = message.guild.members.cache.get(target.id)
         if (targetMember.bannable){
         targetMember.kick()
-        message.channel.send(`${target} has been kicked`)
-        client.channels.cache.get(`812025615732572230`).send(`${message.author} has kicked <@!${args[0]}> | ${args[0]} |
-         ${message.channel.guild.name}`)
+        const embed = new MessageEmbed()
+          .setTitle(`User Kicked`)
+          .addFields(
+            {name: "Moderator", value: `<@!${message.author.id}>`, inline: true},
+            {name: "Kicked", value: `<@!${targetMember}>`, inline: true},
+            {name: "Reason", value: args.slice(2).join(" "), inline: true}
+          )
+        message.channel.send(embed)
         }
         else {
-          message.channel.send(`${targetMember} cannot be kicked`)
+          const embed = new MessageEmbed()
+            .setTitle("Kick Info")
+            .setDescription("User cannot be kicked").then(msg => msg.delete({timeout: 5000}))
+          message.channel.send(embed)
         }
       } else {
-        message.channel.send(`${message.author} Please specify someone to kick.`)
+        const embed = new MessageEmbed()
+        .setTitle("Kick Info")
+        .setDescription("Please specify a user to kick").then(msg => msg.delete({timeout: 5000}))
+        message.channel.send(embed)
       }
     } else {
-      message.channel.send(
-        `${tag} You do not have permission to use this command.`
-      )
+      const embed = new MessageEmbed()
+      .setTitle("Kick Info")
+      .setDescription("You do not have permission to use that command!").then(msg => msg.delete({timeout: 5000}))
     }
   }
 } 

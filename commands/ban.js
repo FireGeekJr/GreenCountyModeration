@@ -44,9 +44,8 @@ module.exports = {
              { name: `Banned`, value: user, inline: true},
              { name: `Reason`, value: `${reason}`, inline: false}
             )
-        message.guild.members.ban(user, {'reason': reason}).then(() => {
+        message.guild.members.ban(user, {'reason': message.author.tag + "|" + message.author.id + ": " + reason}).then(() => {
         message.channel.send(banUserEmbed);
-        message.guild.channels.fetch(`logs`).send(banUserEmbed)
         }).catch(Error => {
             console.log(Error);
             return message.channel.send(cannotBanEmbed)

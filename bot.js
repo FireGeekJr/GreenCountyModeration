@@ -23,6 +23,7 @@ client.once('ready', () => {
   console.log(prefix)
   console.log(bot_info.name)
   console.log(bot_info.version)
+  console.log(client.guilds.cache.size)
 
 });
 
@@ -61,7 +62,8 @@ const activities = [
   `FireGeekJr Break things`,
   `${client.commands.size} Commands!`,
   `${client.channels.cache.size} Channels!`,
-  `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} Users!`
+  `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} Users!`,
+  `Now public! Contact FireGeekJr2#3197 for the link to add it to your own server!`
 ];
 
 let i = 0
