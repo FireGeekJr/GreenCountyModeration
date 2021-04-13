@@ -5,6 +5,6 @@
     "words_array": ["Hi", "Bye", "This is array"],
     "bot_info": {
         "name": "FireBot",
-        "version": "1.1.5"
+        "version": "1.5"
     }
 }

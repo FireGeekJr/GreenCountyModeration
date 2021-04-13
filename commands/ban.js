@@ -11,6 +11,11 @@ module.exports = {
             .setColor(`#FF0000`)
             .setDescription("No reason was specified!")
 
+    const noUserEmbed = new discord.MessageEmbed()
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setColor(`#FF0000`)
+            .setDescription("No member was specified!")
+
       const cannotBanEmbed = new discord.MessageEmbed()
       .setTitle(`Ban Info`)
       .setColor(`#FF0000`)
@@ -18,7 +23,7 @@ module.exports = {
       .addFields(
        { name: `${message.author.tag}`, value: `Could not ban <@!${args[0]}>`, inline: true}
    )
-
+        if (!args[0]){return message.channel.send(noUserEmbed)}
         let parameters = message.content.split(" ");
         let user = parameters[1];
         let reason = parameters.slice(2).join(" ");

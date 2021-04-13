@@ -44,11 +44,8 @@ module.exports = {
           return
         }
         const delamount = Number(args[0], 10);
-        const fetched = message.channel.messages.fetch({
-          limit: delamount
-        })
         try{
-          await message.channel.bulkDelete(delamount + 2)
+          await message.channel.bulkDelete(delamount + 1)
             .then(message.channel.send(sucsess).then(msg => msg.delete({timeout: 5000})))
         } catch(err) {
           console.log(err)
