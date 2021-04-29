@@ -16,6 +16,7 @@
     "mongoose": "^5.11.14",
     "node-fetch": "^2.6.1",
     "opusscript": "^0.0.7",
+    "trello-node-api": "0.0.9",
     "ytdl-core": "^4.4.5"
   }
 }
