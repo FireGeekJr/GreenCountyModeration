@@ -7,7 +7,7 @@ module.exports = {
     execute(message, args, date, timesent){
 
         const hembed = new MessageEmbed()
-            .setTitle(`FireBot's Commands`)
+            .setTitle(`${bot_info[1]}'s Commands`)
             .setColor(`#7D46EB`)
             client.commands.forEach(function(value, key, map) {
                 hembed.addField(value.name, value.description, true)
